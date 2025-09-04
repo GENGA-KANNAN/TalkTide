@@ -1,8 +1,10 @@
-// frontend/src/pages/Signup.js
+
+
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate, Link } from 'react-router-dom';
+import './Signup.css'; // separate CSS similar to Login.css
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +15,6 @@ const Signup = () => {
     e.preventDefault();
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      // successful signup -> redirect to profile
       navigate('/profile', { state: { uid: userCredential.user.uid, email: userCredential.user.email } });
     } catch (error) {
       alert(error.message);
@@ -21,28 +22,45 @@ const Signup = () => {
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '100px' }}>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSignup}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        /><br /><br />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        /><br /><br />
-        <button type="submit">Sign Up</button>
-      </form>
-      <p>
-        Already have an account? <Link to="/">Login</Link>
-      </p>
+    <div className="login-wrapper">
+      {/* LEFT SIDE */}
+      <div className="login-left">
+        <img 
+          src="images/Person.png" 
+          alt="Learn Languages" 
+          className="login-left-img" 
+        />
+        <h1 className="animated-text">Start Your Language Journey</h1>
+        <p className="sub-text">
+          Sign up and join thousands of learners. Practice languages, unlock opportunities, and discover new cultures.
+        </p>
+      </div>
+
+      {/* RIGHT SIDE */}
+      <div className="login-card">
+        <h2>Sign Up</h2>
+        <form onSubmit={handleSignup}>
+          <input
+            type="email"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Sign Up</button>
+        </form>
+
+        <p>
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
+      </div>
     </div>
   );
 };

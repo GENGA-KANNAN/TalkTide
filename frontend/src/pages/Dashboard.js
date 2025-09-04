@@ -1,133 +1,70 @@
-// // frontend/src/pages/Dashboard.js
-// import React from 'react';
-// import { signOut } from 'firebase/auth';
-// import { auth } from '../firebase';
-// import { useNavigate } from 'react-router-dom';
-
-// const Dashboard = () => {
-//   const navigate = useNavigate();
-
-//   const handleLogout = async () => {
-//     try {
-//       await signOut(auth);
-//       alert('Logged out successfully!');
-//       navigate('/'); // redirect to login page
-//     } catch (error) {
-//       alert(error.message);
-//     }
-//   };
-
-//   return (
-//     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-//       <h2>Dashboard</h2>
-//       <p>Welcome to TalkTide!</p>
-//       <button onClick={handleLogout} style={{ marginTop: '20px', padding: '10px 20px', cursor: 'pointer' }}>
-//         Logout
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
-
-// frontend/src/pages/Dashboard.js
-// import React from 'react';
-// import { signOut } from 'firebase/auth';
-// import { auth } from '../firebase';
-// import { useNavigate } from 'react-router-dom';
-
-// const Dashboard = () => {
-//   const navigate = useNavigate();
-
-//   const handleLogout = async () => {
-//     try {
-//       await signOut(auth);
-//       alert('Logged out successfully!');
-//       navigate('/'); // redirect to login page
-//     } catch (error) {
-//       alert(error.message);
-//     }
-//   };
-
-//   const handleEditProfile = () => {
-//     navigate('/edit-profile'); // redirect to EditProfile page
-//   };
-
-//   return (
-//     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-//       <h2>Dashboard</h2>
-//       <p>Welcome to TalkTide!</p>
-//       <button 
-//         onClick={handleEditProfile} 
-//         style={{ marginRight: '10px', padding: '10px 20px', cursor: 'pointer' }}
-//       >
-//         Edit Profile
-//       </button>
-//       <button 
-//         onClick={handleLogout} 
-//         style={{ padding: '10px 20px', cursor: 'pointer' }}
-//       >
-//         Logout
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
-import React from 'react';
+import React, { useState } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import './Dashboard.css';
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
       alert('Logged out successfully!');
-      navigate('/'); // redirect to login page
+      navigate('/login');
     } catch (error) {
       alert(error.message);
     }
   };
 
   const handleEditProfile = () => {
-    navigate('/edit-profile'); // redirect to EditProfile page
+    navigate('/edit-profile');
   };
 
   const handleStartPractice = () => {
-    navigate('/language-select'); // navigate to language selection page
+    navigate('/practice-session');
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h2>Dashboard</h2>
-      <p>Welcome to TalkTide!</p>
+    <div className="dashboard-wrapper">
+      {/* Top Navbar */}
+      <header className="dashboard-header">
+        <div className="logo-title">
+          <img src="images/Talktide logo.png" alt="TalkTide Logo" className="logo" />
+          <span className="title">TalkTide</span>
+        </div>
 
-      <div style={{ marginTop: '20px' }}>
-        <button 
-          onClick={handleEditProfile} 
-          style={{ marginRight: '10px', padding: '10px 20px', cursor: 'pointer' }}
-        >
-          Edit Profile
-        </button>
-        <button 
-          onClick={handleLogout} 
-          style={{ padding: '10px 20px', cursor: 'pointer' }}
-        >
-          Logout
-        </button>
-      </div>
+        {/* Profile section with initials */}
+        <div className="profile-section">
+  <div
+    className="profile-svg"
+    onClick={() => setShowDropdown(!showDropdown)}
+  >
+    {/* SVG Icon */}
+    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#000000">
+      <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"/>
+    </svg>
+  </div>
 
-      <div style={{ marginTop: '40px' }}>
-        <button 
-          onClick={handleStartPractice} 
-          style={{ padding: '15px 30px', cursor: 'pointer', fontSize: '16px' }}
-        >
+  {showDropdown && (
+    <div className="dropdown-menu">
+      <button onClick={handleEditProfile}>Edit Profile</button>
+      <button onClick={handleLogout}>Logout</button>
+    </div>
+  )}
+</div>
+
+      </header>
+
+      {/* Main content */}
+      <main className="dashboard-main">
+        <h1>Welcome to TalkTide!</h1>
+        <p>Learn languages faster and track your progress.</p>
+        <button onClick={handleStartPractice} className="start-btn">
           Start Practice
         </button>
-      </div>
+      </main>
     </div>
   );
 };

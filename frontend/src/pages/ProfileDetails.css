@@ -1,0 +1,134 @@
+/* Full page wrapper */
+.profile-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #7bb8e6, #b8d9f2);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  font-family: 'Poppins', sans-serif;
+  padding: 40px 20px;
+}
+
+/* Gradient animation */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Header section */
+.profile-header {
+  text-align: center;
+  color: #2c3e50; /* Changed header color */
+  margin-bottom: 40px;
+  animation: fadeInUp 1s forwards;
+}
+
+.profile-header h1 {
+  font-size: 42px;
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.profile-header p {
+  font-size: 18px;
+  font-weight: 500;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+  color: #2c3e50; /* Changed paragraph color */
+}
+
+/* Card container */
+.profile-card {
+  background: #ffffff;
+  padding: 40px 35px;
+  border-radius: 20px;
+  max-width: 450px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers all child elements */
+  justify-content: center; /* Centers vertically */
+  animation: fadeIn 1s ease forwards;
+}
+
+/* Form container */
+.profile-card form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Horizontally centers inputs and button */
+  width: 100%;
+}
+
+/* Form inputs */
+.profile-card input {
+  width: 80%;
+  max-width: 360px;
+  padding: 14px 18px;
+  margin: 12px 0;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+  text-align: center; /* Center text inside inputs */
+}
+
+.profile-card input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 10px rgba(52,152,219,0.3);
+}
+
+/* Submit button */
+.profile-card button {
+  width: 70%;
+  max-width: 360px;
+  padding: 14px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #7bb8e6, #6aabdd);
+  color: #fff;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.profile-card button:hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .profile-card {
+    padding: 30px 20px;
+    width: 90%;
+  }
+
+  .profile-header h1 {
+    font-size: 32px;
+  }
+
+  .profile-header p {
+    font-size: 16px;
+  }
+
+  .profile-card input, .profile-card button {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,164 @@
+/* Full page wrapper */
+.dashboard-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #7bb8e6, #b8d9f2);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Gradient animation */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Top Navbar */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 50px;
+  margin-right: 10px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #2c3e50;
+}
+
+/* Profile image + dropdown */
+/* Profile section with dropdown */
+.profile-section {
+  position: relative;
+}
+
+.profile-svg {
+  cursor: pointer; /* cursor changes on hover */
+  transition: transform 0.2s;
+}
+
+.profile-svg:hover {
+  transform: scale(1.05); /* slight zoom effect */
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 50px; /* adjust based on icon size */
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  font-family: 'Poppins', sans-serif;
+  z-index: 10;
+  padding: 5px 0;
+}
+
+.dropdown-menu button {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #2c3e50;
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap; /* ensures single-line text */
+  transition: 0.3s;
+}
+
+.dropdown-menu button:hover {
+  background: #1e3c72; /* nice hover color */
+  color: #fff;
+  border-radius: 8px;
+}
+
+/* Optional: small gap between buttons */
+.dropdown-menu button + button {
+  margin-top: 5px;
+}
+
+
+/* Main content */
+.dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #2c3e50;
+  padding: 40px 20px;
+}
+
+.dashboard-main h1 {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+}
+
+.dashboard-main p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.start-btn {
+  padding: 15px 35px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+background-color: #1e3c72; /* deep blue to match text */  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.start-btn:hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .dashboard-header {
+    padding: 15px 20px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .dashboard-main h1 {
+    font-size: 32px;
+  }
+
+  .dashboard-main p {
+    font-size: 16px;
+  }
+
+  .start-btn {
+    padding: 12px 25px;
+    font-size: 16px;
+  }
+}

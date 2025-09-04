@@ -1,0 +1,70 @@
+/* Full-page background and center alignment */
+.landing-page {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+     background: linear-gradient(135deg, #7bb8e6, #b8d9f2);
+    text-align: center;
+    gap: 40px; /* space between logo+text and button */
+}
+
+/* Logo + text container */
+.logo-container {
+    display: flex;
+    align-items: flex-start; /* logo slightly above text */
+    gap: -500px; /* very small gap */
+}
+
+/* Logo image */
+.logo-image {
+    width: 120px; /* bigger logo */
+    height: auto;
+    margin-top: -22px; /* lift logo slightly above text */
+}
+
+/* Text next to logo */
+.logo-text {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #1e3c72; /* blue text */
+}
+
+/* Start button */
+.start-btn {
+    padding: 15px 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #1e3c72; /* deep blue to match text */
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-left: 40px; /* shift button slightly to the right */
+}
+
+.start-btn:hover {
+    background-color: #0d244c; /* darker blue on hover */
+    transform: scale(1.05);
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .logo-image {
+        width: 90px;
+        margin-top: -5px;
+    }
+
+    .logo-text {
+        font-size: 2rem;
+    }
+
+    .start-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}

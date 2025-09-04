@@ -1,8 +1,8 @@
-// frontend/src/pages/Login.js
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate, Link } from 'react-router-dom';
+import './Login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/dashboard'); // Redirect after login
+      navigate('/dashboard');
     } catch (error) {
       alert(error.message);
     }
@@ -33,38 +33,49 @@ const Login = () => {
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '100px' }}>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        /><br /><br />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        /><br /><br />
-        <button type="submit">Login</button>
-      </form>
-      
-      <p style={{ marginTop: '10px' }}>
-        <button 
-          onClick={handleForgotPassword} 
-          style={{ background: 'none', border: 'none', color: 'blue', cursor: 'pointer', textDecoration: 'underline' }}
-        >
+    <div className="login-wrapper">
+      {/* LEFT SIDE */}
+      <div className="login-left">
+        <img 
+          src="images/Person.png" 
+          alt="Learn Languages" 
+          className="login-left-img" 
+        />
+        <h1 className="animated-text">Speak. Connect. Explore.</h1>
+        <p className="sub-text">
+          Join thousands of learners. Practice languages, unlock opportunities, and discover new cultures.
+        </p>
+      </div>
+
+      {/* RIGHT SIDE */}
+      <div className="login-card">
+        <h2>Login</h2>
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Login</button>
+        </form>
+
+        <button onClick={handleForgotPassword} className="forgot-btn">
           Forgot Password?
         </button>
-      </p>
 
-      <p style={{ marginTop: '10px' }}>
-        Don't have an account? <Link to="/signup">Sign Up</Link>
-      </p>
+        <p>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
+        </p>
+      </div>
     </div>
   );
 };

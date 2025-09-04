@@ -1,8 +1,14 @@
+
+
 import React, { useState, useEffect } from "react";
 import { db, auth } from "../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom"; // <-- import useNavigate
+import './EditProfile.css';
 
 function EditProfile() {
+  const navigate = useNavigate(); // <-- initialize navigate
+
   const [profile, setProfile] = useState({
     name: "",
     dob: "",
@@ -13,33 +19,23 @@ function EditProfile() {
 
   const [loading, setLoading] = useState(true);
 
-  // Fetch current user data
   useEffect(() => {
     const fetchProfile = async () => {
       const user = auth.currentUser;
       if (user) {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          setProfile(docSnap.data());
-        }
+        if (docSnap.exists()) setProfile(docSnap.data());
       }
       setLoading(false);
     };
-
     fetchProfile();
   }, []);
 
-  // Handle input changes
   const handleChange = (e) => {
-    setProfile({
-      ...profile,
-      [e.target.name]: e.target.value
-    });
+    setProfile({ ...profile, [e.target.name]: e.target.value });
   };
 
-  // Update Firestore
   const handleUpdate = async () => {
     const user = auth.currentUser;
     if (user) {
@@ -49,48 +45,56 @@ function EditProfile() {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  // Back button handler
+  const handleBack = () => {
+    navigate(-1); // <-- goes back to previous page
+  };
+
+  //if (loading) return <p>Loading...</p>;
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h2>Edit Profile</h2>
-      <input
-        type="text"
-        name="name"
-        value={profile.name}
-        onChange={handleChange}
-        placeholder="Full Name"
-        required
-      /><br /><br />
-      <input
-        type="date"
-        name="dob"
-        value={profile.dob}
-        onChange={handleChange}
-        required
-      /><br /><br />
-      <input
-        type="text"
-        name="nativeLanguage"
-        value={profile.nativeLanguage}
-        onChange={handleChange}
-        placeholder="Native Language"
-        required
-      /><br /><br />
-      <input
-        type="text"
-        name="secondLanguage"
-        value={profile.secondLanguage || ""}
-        onChange={handleChange}
-        placeholder="Second Language (Optional)"
-      /><br /><br />
-      <input
-        type="email"
-        name="email"
-        value={profile.email}
-        disabled
-      /><br /><br />
-      <button onClick={handleUpdate}>Update Profile</button>
+    <div className="edit-profile-wrapper">
+      <div className="edit-profile-card">
+        <button className="back-btn" onClick={handleBack}>← Back</button> {/* <-- back button */}
+        <h2>Edit Profile</h2>
+        <input
+          type="text"
+          name="name"
+          value={profile.name}
+          onChange={handleChange}
+          placeholder="Full Name"
+          required
+        />
+        <input
+          type="date"
+          name="dob"
+          value={profile.dob}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="nativeLanguage"
+          value={profile.nativeLanguage}
+          onChange={handleChange}
+          placeholder="Native Language"
+          required
+        />
+        <input
+          type="text"
+          name="secondLanguage"
+          value={profile.secondLanguage || ""}
+          onChange={handleChange}
+          placeholder="Second Language (Optional)"
+        />
+        <input
+          type="email"
+          name="email"
+          value={profile.email}
+          disabled
+        />
+        <button className="update-btn" onClick={handleUpdate}>Update Profile</button>
+      </div>
     </div>
   );
 }
